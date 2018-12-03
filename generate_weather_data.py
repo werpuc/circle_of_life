@@ -48,9 +48,9 @@ def scrap_weather_data_into_file(month, year, place):
 
 def main():
 
-	scrap_weather_data_into_file(8, 2018, 'krakow')
-	scrap_weather_data_into_file(9, 2018, 'krakow')
-	scrap_weather_data_into_file(10, 2018, 'krakow')
+	# scrap_weather_data_into_file(8, 2018, 'krakow')
+	# scrap_weather_data_into_file(9, 2018, 'krakow')
+	# scrap_weather_data_into_file(10, 2018, 'krakow')
 	scrap_weather_data_into_file(11, 2018, 'krakow')
 
 

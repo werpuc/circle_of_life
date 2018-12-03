@@ -3,12 +3,14 @@ library(skimr)
 library(anytime)
 library(lubridate)
 
+setwd("C://Users//pucha//projects//circle_of_life")
+
 ## reading data and preparing for later analysis
 weather_data <- read_csv('weather_data_cumulated.csv')
-work_data = read_csv('my_work_data.csv')
-sleep_data = read_delim('sleepdata.csv', ';')
+work_data <- read_csv('my_work_data.csv')
+sleep_data <- read_csv2('sleepdata.csv')
 
-sleep_data = sleep_data[,1:4]
+sleep_data <- sleep_data[,1:4]
 colnames(sleep_data) <- c('start', 'end', 'sleep_quality', 'time_in_bed')
 
 sleep_data <- sleep_data %>%
