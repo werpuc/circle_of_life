@@ -24,8 +24,8 @@ sleep_data <- sleep_data %>%
 life_data <- work_data %>%
   mutate(is_workday = wday(date) != 1 & wday(date) != 7) %>%
   left_join(sleep_data, by = 'date') %>%
-  mutate(sleep_over = round(difftime(time_up, planned_time_up, units = 'hour'), 2),
-         actual_sleep_time = round((time_in_bed+sleep_over)/3600, 2) ) %>%
+  mutate(sleep_over = hms::as.hms(time_up - planned_time_up),
+         actual_sleep_time = hms::as.hms(sleep_over+time_in_bed) ) %>%
   select(date, is_workday, pomodoros, sleep_over, actual_sleep_time, time_up, time_to_bed, in_bed_before_midnight, time_in_bed, sleep_quality, planned_time_up)
 
 life_data <- weather_data %>%

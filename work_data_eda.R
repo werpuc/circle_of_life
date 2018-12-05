@@ -14,6 +14,9 @@ work_data %>%
   spread(stat, formatted) %>%
   select(variable, missing, min, max)
 
+
+# pomodoros per weekday
+
 colores <- wes_palette(name = 'GrandBudapest1', type = 'continuous')
 day_levels <- c('pon', 'wt', 'œr', 'czw', 'pt', 'sob', 'niedz')
 
@@ -69,8 +72,8 @@ work_data %>%
   geom_text(aes(45, 40, label = '20 hours', vjust = -.5, color = colores[2])) + 
   scale_fill_manual(values = colores) +
   geom_hline(yintercept = avg_pomodoros_ever, linetype = "dashed", color = colores[3]) + 
-  geom_text(aes(45, avg_pomodoros_weekly, label = paste0(avg_pomodoros_weekly/2, ' hours'), vjust = -.5)) + 
-  geom_text(aes(45, avg_pomodoros_weekly, label = 'average', vjust = 1.2)) + 
+  geom_text(aes(45, avg_pomodoros_weekly, label = paste0(avg_pomodoros_weekly/2, ' hours'), vjust = -.2)) + 
+  geom_text(aes(45, avg_pomodoros_weekly, label = 'average', vjust = 1.5)) + 
   theme(legend.position="none") + 
   labs(x = 'week', y = 'sum of pomodoros', title = 'Sum of pomodoros per week') 
 
@@ -88,4 +91,23 @@ work_data %>%
     geom_text(aes(as.Date('2018-11-09'), y = avg_pomodoros_daily, label = 'average', vjust = 1.3)) +
     labs(x = 'month', y = 'pomodoros', title = 'Pomodoros in time')
 
+
+# time_up vs weekday
+
+work_data %>%
+  group_by(day = wday(date,  label = TRUE)) %>%
+  summarize(mean_timeup = round(mean(time_up, na.rm = TRUE)/3600, 1),
+            sd = round(sd(time_up, na.rm = TRUE)/3600, 1)) %>%
+  mutate(day = gsub('\\\\.', '', day),
+         is_workday = (day!='niedz' & day!='sob')) %>%
+  mutate(day = factor(day, day_levels)) %>%
+  ggplot(aes(x = day, y = mean_timeup, fill = is_workday)) + 
+  scale_fill_manual(values = colores) +
+  labs(x = 'weekday', y = 'time up [hours]', title = 'Mean time up per weekday') +
+  geom_col(aes(x = day, y = mean_timeup + sd, fill = !is_workday), alpha = 0.2) +
+  geom_col(aes(x = day, y = mean_timeup, fill = is_workday)) +
+  geom_label(aes(label = mean_timeup), vjust = 1.5) + 
+  geom_col(aes(x = day, y = mean_timeup - sd, fill = !is_workday), alpha = 0.2) +
+  guides(fill = 'none')
+  
 

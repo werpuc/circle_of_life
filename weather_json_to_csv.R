@@ -3,6 +3,8 @@ library(data.table)
 library(tidyverse)
 library(anytime)
 
+# manipulate monthly weather data in jsons into functionable data frame 
+
 setwd('C:\\Users\\pucha\\Projects\\circle_of_life')
 
 ## function to read json into table
