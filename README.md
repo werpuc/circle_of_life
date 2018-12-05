@@ -11,13 +11,15 @@ Anyway, I gathered the data (what else can be done?). In this project I try to f
 
 
 ## TODO
-[x] gather data
-[ ] complete README
-[ ] eda
-[ ] model data
-[ ] describe the results in story.Rmd
-[ ] move on
+- [x] gather data
+- [ ] complete README
+- [ ] eda
+- [ ] model data
+- [ ] describe the results in story.Rmd
+- [ ] move on
 
 
-* If not familiar - [Pomodoro Techinque](https://en.wikipedia.org/wiki/Pomodoro_Technique)  
+## Additional
+
+If not familiar - [Pomodoro Techinque](https://en.wikipedia.org/wiki/Pomodoro_Technique)  
 
